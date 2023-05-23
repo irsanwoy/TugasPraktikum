@@ -1,0 +1,130 @@
+#include <iostream>
+
+using namespace std;
+
+struct Node {
+    char data;
+    Node* left;
+    Node* right;
+};
+
+struct Tree {
+    Node* root;
+};
+
+bool IsEmptyNode(Node* simpul) {
+    return (simpul == NULL);
+}
+
+void InitNode(Node*& simpul, char data) {
+    if (IsEmptyNode(simpul)) {
+        simpul = new Node();
+        simpul->data = data;
+        simpul->left = NULL;
+        simpul->right = NULL;
+    }
+}
+
+void PreOrder(Node* root) {
+    if (!IsEmptyNode(root)) {
+        cout << root->data << " ";
+        PreOrder(root->left);
+        PreOrder(root->right);
+    }
+}
+
+void InOrder(Node* root) {
+    if (!IsEmptyNode(root)) {
+        InOrder(root->left);
+        cout << root->data << " ";
+        InOrder(root->right);
+    }
+}
+
+void PostOrder(Node* root) {
+    if (!IsEmptyNode(root)) {
+        PostOrder(root->left);
+        PostOrder(root->right);
+        cout << root->data << " ";
+    }
+}
+
+void DestroyTree(Node*& root) {
+    if (!IsEmptyNode(root)) {
+        DestroyTree(root->left);
+        DestroyTree(root->right);
+        delete root;
+        root = NULL;
+    }
+}
+
+Node* FindMinimumNode(Node* node) {
+    if (node->left == NULL)
+        return node;
+    return FindMinimumNode(node->left);
+}
+
+void DeleteNode(Node*& root, char data) {
+    if (IsEmptyNode(root))
+        return;
+
+    if (data < root->data)
+        DeleteNode(root->left, data);
+    else if (data > root->data)
+        DeleteNode(root->right, data);
+    else {
+        if (root->left == NULL && root->right == NULL) {
+            delete root;
+            root = NULL;
+        } else if (root->left == NULL) {
+            Node* temp = root;
+            root = root->right;
+            delete temp;
+        } else if (root->right == NULL) {
+            Node* temp = root;
+            root = root->left;
+            delete temp;
+        } else {
+            Node* minRight = FindMinimumNode(root->right);
+            root->data = minRight->data;
+            DeleteNode(root->right, minRight->data);
+        }
+    }
+}
+
+int main() {
+    Tree* pohon = new Tree;
+    pohon->root = NULL;
+
+    InitNode(pohon->root, 'M');
+    InitNode(pohon->root->left, 'E');
+    InitNode(pohon->root->left->right, 'I');
+    InitNode(pohon->root->right, 'L');
+    InitNode(pohon->root->right->right, 'O');
+    InitNode(pohon->root->right->right->left, 'D');
+
+    cout << "Tampilkan secara pre-order: ";
+    PreOrder(pohon->root);
+    cout << endl;
+
+    cout << "Tampilkan secara in-order: ";
+    InOrder(pohon->root);
+    cout << endl;
+
+    cout << "Tampilkan secara post-order: ";
+    PostOrder(pohon->root);
+    cout << endl;
+
+    char nodeToDelete = 'I';
+    cout << "Menghapus simpul dengan data: " << nodeToDelete << endl;
+    DeleteNode(pohon->root, nodeToDelete);
+
+    cout << "Tampilkan setelah penghapusan: ";
+    InOrder(pohon->root);
+    cout << endl;
+
+    DestroyTree(pohon->root);
+    delete pohon;
+
+    return 0;
+}
