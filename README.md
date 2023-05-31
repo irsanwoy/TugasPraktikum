@@ -1,1 +1,1 @@
-# linkedLIstVersiStudyWhiteStudent
+# Semua tentang praktikum
