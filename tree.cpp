@@ -106,7 +106,7 @@ void update(char label, Node *node)
   }
 }
 
-// retrieve
+// retrieve digunakan untuk mengambil informasi dari suatu node yang ditunjuk
 void retrieve( Node *node )
 {
   if( !root ){
@@ -120,7 +120,7 @@ void retrieve( Node *node )
   }
 }
 
-// Find
+// Find  bdigunakan untuk mencari informasi terkait dengan suatu node yang ditunjuk
 void find( Node *node )
 {
   if( !root ){
@@ -333,9 +333,10 @@ void charateristic()
 
 int main()
 {
-
+  // Membuat pohon baru dengan node A sebagai root
   createNewTree('A');
 
+  // Membuat node-node lainnya dan menghubungkannya dengan node-node yang sudah ada
   Node *nodeB, *nodeC, *nodeD, *nodeE, *nodeF, *nodeG, *nodeH, *nodeI, *nodeJ;
 
   nodeB = insertLeft('B', root);
@@ -348,15 +349,20 @@ int main()
   nodeI = insertLeft('I', nodeG);
   nodeJ = insertRight('J', nodeG);
 
+  // Menampilkan apakah pohon kosong atau tidak
   cout << "Tree empty? : " << empty() << endl;
 
+  // Mengupdate label node C menjadi Z, kemudian mengubahnya kembali menjadi C
   update('Z', nodeC);
   update('C', nodeC);
 
+  // Menampilkan label node C
   retrieve(nodeC);
 
+  // Menampilkan informasi tentang node C dan hubungannya dengan node lainnya
   find(nodeC);
 
+  // Menampilkan traversal PreOrder, InOrder, dan PostOrder dimulai dari node E
   cout << "\nPreOrder :" << endl;
   preOrder(nodeE);
   cout << "\n" << endl;
@@ -365,14 +371,19 @@ int main()
   cout << "\n" << endl;
   cout << "PostOrder :" << endl;
   postOrder(nodeE);
-  cout << "\n" << endl;  
+  cout << "\n" << endl;
 
+  // Menampilkan karakteristik pohon seperti ukuran, tinggi, dan rata-rata jumlah node
   charateristic();
-  
+
+  // Menghapus subtree yang dimulai dari node E
   deleteSub(nodeE);
+
+  // Menampilkan traversal PreOrder setelah subtree dihapus
   cout << "\nPreOrder :" << endl;
   preOrder();
   cout << "\n" << endl;
 
+  // Menampilkan karakteristik pohon setelah subtree dihapus
   charateristic();
 }
