@@ -74,7 +74,7 @@ Node *insertRight( char label, Node *node )
       newNode->right = NULL;
       newNode->parent = node;
       node->right = newNode;
-      cout << "\nNode" << label << " berhasil ditambahkan ke anak kanan " << newNode->parent->label << endl;
+      cout << "\nNode" << label << "  berhasil ditambahkan ke anak kanan " << newNode->parent->label << endl;
       return newNode;
     }
 
@@ -90,7 +90,7 @@ bool empty()
     return false;
 }
 
-// update
+// update untuk merubah node yang ditunjuk oleh pointer
 void update(char label, Node *node)
 {
   if( !root ){
@@ -120,7 +120,7 @@ void retrieve( Node *node )
   }
 }
 
-// Find  bdigunakan untuk mencari informasi terkait dengan suatu node yang ditunjuk
+// Find  digunakan untuk mencari informasi terkait dengan suatu node yang ditunjuk
 void find( Node *node )
 {
   if( !root ){
@@ -337,7 +337,7 @@ int main()
   createNewTree('A');
 
   // Membuat node-node lainnya dan menghubungkannya dengan node-node yang sudah ada
-  Node *nodeB, *nodeC, *nodeD, *nodeE, *nodeF, *nodeG, *nodeH, *nodeI, *nodeJ;
+  Node *nodeA = root, *nodeB, *nodeC, *nodeD, *nodeE, *nodeF, *nodeG, *nodeH, *nodeI, *nodeJ;
 
   nodeB = insertLeft('B', root);
   nodeC = insertRight('C', root);
@@ -356,21 +356,20 @@ int main()
   update('Z', nodeC);
   update('C', nodeC);
 
-  // Menampilkan label node C
-  retrieve(nodeC);
+  
 
   // Menampilkan informasi tentang node C dan hubungannya dengan node lainnya
   find(nodeC);
 
   // Menampilkan traversal PreOrder, InOrder, dan PostOrder dimulai dari node E
   cout << "\nPreOrder :" << endl;
-  preOrder(nodeE);
+  preOrder(nodeA);
   cout << "\n" << endl;
   cout << "InOrder :" << endl;
-  inOrder(nodeE);
+  inOrder(nodeA);
   cout << "\n" << endl;
   cout << "PostOrder :" << endl;
-  postOrder(nodeE);
+  postOrder(nodeA);
   cout << "\n" << endl;
 
   // Menampilkan karakteristik pohon seperti ukuran, tinggi, dan rata-rata jumlah node
